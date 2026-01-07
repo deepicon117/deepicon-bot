@@ -1,12 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Widget Test</title>
+  <meta charset="UTF-8">
+  <title>Deepicon Bot</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: monospace;
+      background: #020409;
+      color: #00ff9c;
+    }
+    .chat {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+    .input {
+      display: flex;
+      border-top: 1px solid #1f2933;
+    }
+    input {
+      flex: 1;
+      padding: 10px;
+      background: black;
+      border: none;
+      color: #00ff9c;
+    }
+    button {
+      padding: 10px;
+      background: #00ff9c;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body style="background:black;color:#00ff9c;font-family:monospace;">
-  <h2>Widget Test Page</h2>
-  <iframe src="widget.html"
-          style="width:400px;height:500px;border:1px solid #00ff9c;">
-  </iframe>
+<body>
+
+<div class="chat">
+  <div class="messages" id="messages">
+    <p><strong>Deepicon Bot:</strong> Online.</p>
+  </div>
+  <div class="input">
+    <input id="msg" placeholder="Type message...">
+    <button onclick="send()">Send</button>
+  </div>
+</div>
+
+<script>
+  function send() {
+    const input = document.getElementById("msg");
+    const messages = document.getElementById("messages");
+
+    if (!input.value) return;
+
+    messages.innerHTML += `<p><strong>You:</strong> ${input.value}</p>`;
+    messages.innerHTML += `<p><strong>Deepicon Bot:</strong> Processing...</p>`;
+    input.value = "";
+    messages.scrollTop = messages.scrollHeight;
+  }
+</script>
+
 </body>
 </html>
