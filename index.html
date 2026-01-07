@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deepicon Access</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #05080d;
+      color: #00ff9c;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      width: 320px;
+      padding: 25px;
+      border: 1px solid #00ff9c;
+      background: #020409;
+    }
+    h2 { text-align: center; }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      background: black;
+      border: 1px solid #00ff9c;
+      color: #00ff9c;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #00ff9c;
+      color: black;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    .switch {
+      text-align: center;
+      margin-top: 10px;
+      cursor: pointer;
+      color: #7dd3fc;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2 id="title">Create Account</h2>
+  <input id="name" placeholder="Name">
+  <input id="email" placeholder="Email">
+  <button onclick="submitForm()">Continue</button>
+  <div class="switch" onclick="toggle()">Already have an account? Login</div>
+</div>
+
+<script>
+  let loginMode = false;
+
+  function toggle() {
+    loginMode = !loginMode;
+    document.getElementById("title").innerText =
+      loginMode ? "Login" : "Create Account";
+    document.getElementById("name").style.display =
+      loginMode ? "none" : "block";
+  }
+
+  function submitForm() {
+    const name = document.getElementById("name").value || "Agent";
+    const email = document.getElementById("email").value;
+
+    if (!email) {
+      alert("Email required");
+      return;
+    }
+
+    localStorage.setItem("deepicon_user", JSON.stringify({ name, email }));
+    window.location.href = "terminal.html";
+  }
+</script>
+
+</body>
+</html>
