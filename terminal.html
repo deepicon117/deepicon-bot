@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deepicon Agent Terminal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: #020409;
+      color: #00ff9c;
+      font-family: monospace;
+    }
+    .terminal {
+      padding: 20px;
+    }
+    .log {
+      border: 1px solid #1f2933;
+      padding: 10px;
+      height: 60vh;
+      overflow-y: auto;
+      background: black;
+    }
+    iframe {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      width: 350px;
+      height: 500px;
+      border: 1px solid #00ff9c;
+      background: black;
+    }
+  </style>
+</head>
+<body>
+
+<div class="terminal">
+  <h3 id="welcome"></h3>
+  <div class="log" id="log">
+    <p>> Terminal initialized</p>
+    <p>> Awaiting sessions...</p>
+  </div>
+</div>
+
+<iframe src="widget.html"></iframe>
+
+<script>
+  const user = JSON.parse(localStorage.getItem("deepicon_user"));
+  if (!user) location.href = "index.html";
+
+  document.getElementById("welcome").innerText =
+    `Welcome, ${user.name}`;
+
+  setInterval(() => {
+    const log = document.getElementById("log");
+    log.innerHTML += `<p>> [${new Date().toLocaleTimeString()}] System OK</p>`;
+    log.scrollTop = log.scrollHeight;
+  }, 6000);
+</script>
+
+</body>
+</html>
